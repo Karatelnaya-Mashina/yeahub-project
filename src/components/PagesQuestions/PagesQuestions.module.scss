@@ -1,0 +1,42 @@
+@use '../../styles/variables' as vars;
+
+.pageList {
+	display: flex;
+	align-items: center;
+	margin-top: 2.5em;
+}
+.btnArrow {
+	width: 1.75em;
+	height: 1.75em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 23px;
+	border: 2px solid vars.$purple-color;
+	cursor: pointer;
+}
+.btnPage {
+	margin: 0.375em;
+	border: none;
+	font-size: vars.$font-size-small;
+	font-weight: vars.$font-weight-medium;
+	line-height: 120%;
+	color: vars.$color-text-gray;
+	cursor: pointer;
+}
+.active {
+	padding: 0.125em 0.375em 0.125em 0.375em;
+	border-radius: 2px;
+	color: vars.$color-text-white;
+	background-color: vars.$purple-color;
+}
+.disabled {
+	border: 2px solid rgba(0, 0, 0, 0.5);
+	cursor: not-allowed;
+	svg > path {
+		fill: rgba(0, 0, 0, 0.5);
+	}
+}
+.disabledEllipsis {
+	cursor: default;
+}
