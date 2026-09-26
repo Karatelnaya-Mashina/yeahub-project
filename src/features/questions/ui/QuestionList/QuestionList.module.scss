@@ -1,0 +1,156 @@
+@use '../../../../app/styles/variables' as vars;
+
+.list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 63%;
+	padding: 1.5625em 1.25em 2.5em 1.25em;
+	border-radius: 24px;
+	background-color: vars.$background-white;
+
+	&__header {
+		padding-bottom: 1.5em;
+		padding-right: 35em;
+	}
+	&__filter {
+		display: none;
+	}
+}
+.card {
+	width: 100%;
+}
+.pageList {
+	display: flex;
+	justify-content: space-between;
+	width: 14.625em;
+	height: 1.75em;
+
+	&__number {
+		:hover {
+			color: vars.$purple-dot;
+		}
+	}
+}
+
+.resetButton {
+	margin-top: 1.25em;
+	padding: 0.75em 1.5em;
+	background: vars.$purple-color;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-size: vars.$font-size-base;
+	cursor: pointer;
+	&:hover {
+		background: vars.$purple-dot;
+	}
+}
+
+.loading {
+	padding: 5em 1.25em;
+	min-height: 25em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: vars.$font-size-base;
+	color: vars.$color-text-gray;
+	p {
+		margin: 0;
+		font-weight: vars.$font-weight-medium;
+		color: vars.$color-text-gray;
+	}
+}
+
+.spinner {
+	margin-bottom: 1.25em;
+	width: 3em;
+	height: 3em;
+	border: 5px solid vars.$background-gray;
+	border-top: 5px solid vars.$purple-color;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	box-shadow: 0 0.25em 0.75em rgba(106, 11, 255, 0.1);
+}
+
+.errorQuestions {
+	display: flex;
+	justify-content: center;
+	width: 20%;
+	height: 20%;
+	margin: 0 auto;
+	padding: 1.25em 2em;
+	background-color: vars.$error-background-color;
+	border: vars.$error-border;
+	border-radius: 0.75em;
+	color: vars.$error-color;
+	font-size: vars.$font-size-base;
+	font-weight: vars.$font-weight-medium;
+	text-align: center;
+}
+
+@media (max-width: 768px) {
+	.list {
+		width: 42.25em;
+		&__header {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding-right: 0;
+		}
+		&__filter {
+			display: block;
+			cursor: pointer;
+			svg path {
+				&:hover {
+					fill: vars.$purple-color;
+				}
+			}
+		}
+	}
+	.errorQuestions {
+		font-size: 1em;
+		padding: 1em 1.25em;
+	}
+}
+@media (max-width: 360px) {
+	.list {
+		padding: 1.25em 0.25em;
+		width: 20em;
+
+		&__header {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding-right: 0;
+		}
+		&__title {
+			font-size: 20px;
+		}
+		&__filter {
+			display: block;
+			cursor: pointer;
+			svg path {
+				&:hover {
+					fill: vars.$purple-color;
+				}
+			}
+		}
+	}
+	.errorQuestions {
+		font-size: 0.875em;
+		padding: 0.875em 1em;
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

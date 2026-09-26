@@ -1,9 +1,10 @@
 import { useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import QuestionList from '../../components/QuestionList/QuestionList';
-import FilterSidebar from '../../components/FilterSidebar/FilterSidebar';
-import Modal from '../../components/Modal/Modal';
+import QuestionList from '../../features/questions/ui/QuestionList/QuestionList';
+import FilterSidebar from '../../features/questions/ui/FilterSidebar/FilterSidebar';
+
+import Modal from '../../shared/ui/Modal/Modal';
 
 import styles from './QuestionsListPage.module.scss';
 

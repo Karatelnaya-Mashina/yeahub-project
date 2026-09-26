@@ -2,12 +2,13 @@ import { useCallback, useState } from 'react';
 import {
 	useGetSkillsQuery,
 	useGetSpecializationsQuery,
-} from '../../features/questions/questionsApi';
-import { useDataQuestions } from '../../hooks/useDataQuestions';
-import { useGetQuizQuestionQuery } from '../../features/quiz/quizApi';
+} from '../../features/questions/api/questionsApi';
 
-import FilterGroup from '../../components/FilterSidebar/FilterGroup';
-import Icon from '../../assets/icons/Icon';
+import { useDataQuestions } from '../../features/questions/api/useDataQuestions';
+import { useGetQuizQuestionQuery } from '../../features/quiz/api/quizApi';
+
+import FilterGroup from '../../features/questions/ui/FilterSidebar/FilterGroup';
+import Icon from '../../shared/assets/icons/Icon';
 
 import styles from './SimulatorPage.module.scss';
 

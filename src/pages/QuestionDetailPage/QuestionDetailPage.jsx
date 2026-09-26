@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useGetQuestionIdQuery } from '../../features/questions/questionsApi';
+import { useGetQuestionIdQuery } from '../../features/questions/api/questionsApi';
 
-import Icon from '../../assets/icons/Icon';
+import Icon from '../../shared/assets/icons/Icon';
 import styles from './QuestionDetailPage.module.scss';
 
 const QuestionDetailPage = () => {
