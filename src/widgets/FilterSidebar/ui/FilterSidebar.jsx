@@ -135,7 +135,7 @@ const FilterSidebar = memo(({ modal }) => {
 		newStatus => {
 			updateFiltersWithSearch({ status: newStatus });
 		},
-		[filters.status, updateFiltersWithSearch],
+		[updateFiltersWithSearch],
 	);
 
 	if (specsLoad || skillsLoad) {
