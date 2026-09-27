@@ -1,0 +1,36 @@
+@use '@/app/styles/variables' as vars;
+
+.main {
+	display: flex;
+	gap: 1.25em;
+	padding: 2.5em 7em 8.125em 7em;
+	max-width: 90em;
+	margin: 0 auto;
+}
+
+.container {
+	width: 90em;
+}
+
+@media (max-width: 768px) {
+	.container {
+		width: 48em;
+	}
+
+	.main {
+		position: relative;
+		padding: 2.5em 1.875em;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 360px) {
+	.container {
+		width: 22.5em;
+	}
+
+	.main {
+		position: relative;
+		padding: 1.25em 0.625em;
+	}
+}

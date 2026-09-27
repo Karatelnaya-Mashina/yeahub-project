@@ -1,0 +1,83 @@
+@use '@/app/styles/variables.scss' as vars;
+
+.simulator {
+	margin: 2.5em 7em;
+	padding: 1.5em;
+	background: vars.$background-white;
+	border-radius: 24px;
+	box-shadow: 0px 4px 10px 0px rgba(106, 99, 118, 0.1);
+	background: rgba(255, 255, 255, 1);
+
+	&_header {
+		color: rgba(25, 25, 25, 1);
+		font-size: 24px;
+		font-weight: vars.$font-weight-medium;
+	}
+	&_split {
+		margin-top: 1.5em;
+		display: flex;
+		justify-content: space-between;
+		gap: 8em;
+	}
+}
+.quizFilter {
+	max-width: 38.75em;
+}
+
+.numberQuestions {
+	&_title {
+		margin-bottom: 0.5em;
+		color: vars.$color-text-gray;
+		font-size: vars.$font-size-base;
+		font-weight: vars.$font-weight-medium;
+	}
+	&_wrapper {
+		padding: 10px 12px;
+		display: inline-flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 16px;
+		border: 1px solid rgba(186, 186, 186, 1);
+		border-radius: 12px;
+	}
+	&_btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 20px;
+		height: 20px;
+		border: none;
+		background: none;
+		&:hover path {
+			fill: vars.$purple-color;
+		}
+	}
+}
+.start {
+	height: 48px;
+	display: flex;
+	flex-direction: row-reverse;
+	&_btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+		padding: 13px 40px;
+		border-radius: 12px;
+		border: none;
+		background: vars.$purple-color;
+		&:hover {
+			box-shadow: 0px 1px 5px 1px vars.$purple-color;
+		}
+	}
+
+	p {
+		color: vars.$color-text-white;
+		font-size: vars.$font-size-base;
+		font-weight: vars.$font-weight-bold;
+		line-height: 110%;
+	}
+	path {
+		fill: #fff;
+	}
+}
