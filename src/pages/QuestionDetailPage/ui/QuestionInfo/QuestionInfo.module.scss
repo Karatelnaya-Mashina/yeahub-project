@@ -1,0 +1,87 @@
+@use '@/app/styles/variables' as vars;
+
+.info {
+	padding: 1.5em;
+	width: 24.5em;
+	background: #fff;
+	border-radius: 24px;
+
+	p {
+		color: vars.$color-text-gray;
+	}
+
+	&__level {
+		width: 21.5em;
+
+		&_lvl {
+			margin-top: 0.5em;
+			height: 2em;
+			display: flex;
+			gap: 1em;
+			font-size: vars.$font-size-small;
+			font-weight: vars.$font-weight-bold;
+
+			.complexity,
+			.rate {
+				padding: 0.5em;
+				background: vars.$background-gray;
+				border-radius: 8px;
+			}
+
+			span {
+				padding: 0.25em;
+				border-radius: 4px;
+				background: vars.$purple-color;
+				color: #fff;
+			}
+		}
+	}
+
+	&__skills {
+		margin-top: 2em;
+
+		&_skill {
+			margin-top: 0.5em;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 10px;
+
+			button {
+				padding: 10px 12px;
+				display: flex;
+				align-items: center;
+				gap: 0.125em;
+				border: 1px solid vars.$purple-dot;
+				border-radius: 12px;
+				background: none;
+				color: rgba(48, 48, 48, 1);
+				font-size: vars.$font-size-base;
+				font-weight: vars.$font-weight-medium;
+			}
+		}
+	}
+
+	&__keywords {
+		margin-top: 1.5em;
+
+		&_keyword {
+			margin-top: 0.5em;
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 14px;
+			font-size: vars.$font-size-base;
+			font-weight: vars.$font-weight-regular;
+			color: vars.$purple-color;
+		}
+	}
+
+	&__author {
+		margin-top: 1.5em;
+
+		span {
+			color: vars.$purple-color;
+		}
+	}
+}

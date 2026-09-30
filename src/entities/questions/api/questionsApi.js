@@ -33,44 +33,39 @@ export const questionsApi = baseApi.injectEndpoints({
 				};
 			},
 		}),
-		getSpecializations: builder.query({
-			query: (params = {}) => {
-				const { page = 1, limit = 100, ...filters } = params;
-				return {
-					url: 'specializations',
-					params: {
-						page,
-						limit,
-						...filters,
-					},
-				};
-			},
-		}),
-		getSkills: builder.query({
-			query: (params = {}) => {
-				const { page = 1, limit = 100, ...filters } = params;
-				return {
-					url: 'skills',
-					params: {
-						page,
-						limit,
-						...filters,
-					},
-				};
-			},
-		}),
-		getQuestionId: builder.query({
-			query: id => {
-				return { url: `/questions/public-questions/${id}` };
-			},
-		}),
 	}),
 });
 
-export const {
-	useGetQuestionsQuery,
-	useLazyGetQuestionsQuery,
-	useGetSpecializationsQuery,
-	useGetSkillsQuery,
-	useGetQuestionIdQuery,
-} = questionsApi;
+export const { useGetQuestionsQuery, useLazyGetQuestionsQuery } = questionsApi;
+
+// getSpecializations: builder.query({
+// 			query: (params = {}) => {
+// 				const { page = 1, limit = 100, ...filters } = params;
+// 				return {
+// 					url: 'specializations',
+// 					params: {
+// 						page,
+// 						limit,
+// 						...filters,
+// 					},
+// 				};
+// 			},
+// 		}),
+// 		getSkills: builder.query({
+// 			query: (params = {}) => {
+// 				const { page = 1, limit = 100, ...filters } = params;
+// 				return {
+// 					url: 'skills',
+// 					params: {
+// 						page,
+// 						limit,
+// 						...filters,
+// 					},
+// 				};
+// 			},
+// 		}),
+// 		getQuestionId: builder.query({
+// 			query: id => {
+// 				return { url: `/questions/public-questions/${id}` };
+// 			},
+// 		}),

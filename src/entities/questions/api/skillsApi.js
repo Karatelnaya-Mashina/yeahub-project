@@ -1,6 +1,6 @@
 import { baseApi } from '@/shared/api/baseApi';
 
-export const skillApi = baseApi.injectEndpoints({
+export const skillsApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
 		getSkills: builder.query({
 			query: (params = {}) => {
@@ -18,4 +18,4 @@ export const skillApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useGetSkillsQuery } = skillApi;
+export const { useGetSkillsQuery, useLazyGetSkillsQuery } = skillsApi;

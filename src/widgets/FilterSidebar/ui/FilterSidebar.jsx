@@ -48,20 +48,6 @@ const FilterSidebar = memo(({ modal }) => {
 
 	const skills = skillsData?.data;
 
-	// const lastSyncedSearch = useRef(filters.search || '');
-
-	// useEffect(() => {
-	// 	lastSyncedSearch.current = filters.search || '';
-	// 	setSearch(filters.search || '');
-	// }, [filters.search]);
-
-	// useEffect(() => {
-	// 	if (debouncedSearch !== lastSyncedSearch.current) {
-	// 		lastSyncedSearch.current = debouncedSearch;
-	// 		updateFilters({ search: debouncedSearch.trim() });
-	// 	}
-	// }, [debouncedSearch, updateFilters]);
-
 	const updateFiltersWithSearch = useCallback(
 		patch => {
 			updateFilters({

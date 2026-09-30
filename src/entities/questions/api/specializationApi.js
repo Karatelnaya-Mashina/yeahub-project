@@ -18,4 +18,5 @@ export const specializationApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useGetSpecializationsQuery } = specializationApi;
+export const { useGetSpecializationsQuery, useLazyGetSpecializationsQuery } =
+	specializationApi;

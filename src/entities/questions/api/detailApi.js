@@ -10,4 +10,4 @@ export const detailApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useGetQuestionIdQuery } = detailApi;
+export const { useGetQuestionIdQuery, useLazyGetQuestionIdQuery } = detailApi;
