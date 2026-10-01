@@ -8,7 +8,8 @@ import Layout from './Layout';
 import { MainPage } from '@/pages/MainPage';
 import { QuestionsListPage } from '@/pages/QuestionsListPage';
 import { QuestionDetailPage } from '@/pages/QuestionDetailPage';
-import { SimulatorPage } from '@/pages/SimulatorPage';
+import { MockInterviewPage } from '@/pages/MockInterviewPage';
+import { Quiz } from '@/pages/MockInterviewPage';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -16,7 +17,8 @@ const router = createBrowserRouter(
 			<Route index element={<MainPage />} />
 			<Route path='questions' element={<QuestionsListPage />} />
 			<Route path='/:id' element={<QuestionDetailPage />} />
-			<Route path='simulator' element={<SimulatorPage />} />
+			<Route path='mock-interview' element={<MockInterviewPage />} />
+			<Route path='/mock-interview/quiz' element={<Quiz />} />
 		</Route>,
 	),
 );

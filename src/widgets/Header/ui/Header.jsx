@@ -22,7 +22,7 @@ const Header = () => {
 						<NavLink to='/questions' className={styles.link}>
 							База вопросов
 						</NavLink>
-						<NavLink to='/simulator' className={styles.link}>
+						<NavLink to='/mock-interview' className={styles.link}>
 							Тренажер
 						</NavLink>
 						<NavLink className={styles.link}>Материалы</NavLink>

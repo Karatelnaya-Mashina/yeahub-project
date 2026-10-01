@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useQuestions } from '@/entities/questions';
+import { useFiltersItems } from '@/entities/questions';
 
 import QuestionList from './QuestionList/QuestionList';
 import { FilterSidebar } from '@/widgets/FilterSidebar';
@@ -11,13 +12,9 @@ import styles from './QuestionsListPage.module.scss';
 export default function QuestionsListPage() {
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const {
-		filteredQuestions,
-		total,
-		initialLoading,
-		error,
-		handleResetFilters,
-	} = useQuestions();
+	const { filteredQuestions, total, initialLoading, error } = useQuestions();
+
+	const { handleResetFilters } = useFiltersItems();
 
 	const [modal, setModal] = useState(false);
 

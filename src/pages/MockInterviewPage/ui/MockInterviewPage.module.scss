@@ -24,6 +24,35 @@
 	max-width: 38.75em;
 }
 
+.start {
+	height: 48px;
+	display: flex;
+	flex-direction: row-reverse;
+	&_link {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+		padding: 13px 40px;
+		border-radius: 12px;
+		border: none;
+		background: vars.$purple-color;
+		&:hover {
+			box-shadow: 0px 1px 5px 1px vars.$purple-color;
+		}
+	}
+
+	p {
+		color: vars.$color-text-white;
+		font-size: vars.$font-size-base;
+		font-weight: vars.$font-weight-bold;
+		line-height: 110%;
+	}
+	path {
+		fill: #fff;
+	}
+}
+
 .numberQuestions {
 	&_title {
 		margin-bottom: 0.5em;
@@ -51,33 +80,5 @@
 		&:hover path {
 			fill: vars.$purple-color;
 		}
-	}
-}
-.start {
-	height: 48px;
-	display: flex;
-	flex-direction: row-reverse;
-	&_btn {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 8px;
-		padding: 13px 40px;
-		border-radius: 12px;
-		border: none;
-		background: vars.$purple-color;
-		&:hover {
-			box-shadow: 0px 1px 5px 1px vars.$purple-color;
-		}
-	}
-
-	p {
-		color: vars.$color-text-white;
-		font-size: vars.$font-size-base;
-		font-weight: vars.$font-weight-bold;
-		line-height: 110%;
-	}
-	path {
-		fill: #fff;
 	}
 }

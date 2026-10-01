@@ -1,4 +1,5 @@
 export { useQuestions } from './model/useQuestions';
+export { useFiltersItems } from './model/useFiltersItems';
 
 export {
 	useGetQuestionsQuery,

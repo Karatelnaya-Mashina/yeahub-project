@@ -1,9 +1,14 @@
 import { useCallback, memo } from 'react';
-import { useQuestions } from '@/entities/questions/model/useQuestions';
+import { useFiltersItems } from '@/entities/questions';
+
 import {
 	useGetSkillsQuery,
 	useGetSpecializationsQuery,
 } from '@/entities/questions';
+
+import { useSpecializationToggle } from '@/shared/lib/hooks/useSpecializationToggle';
+import { useSkillsToggle } from '@/shared/lib/hooks/useSkillsToggle';
+import { useComplexityToggle } from '@/shared/lib/hooks/useComplexityToggle';
 
 import FilterGroup from './FilterGroup';
 import SearchInput from '@/shared/ui/SearchInput/SearchInput';
@@ -32,7 +37,7 @@ const STATUS_ITEMS = [
 ];
 
 const FilterSidebar = memo(({ modal }) => {
-	const { filters, updateFilters } = useQuestions();
+	const { filters, updateFilters } = useFiltersItems();
 
 	const {
 		data: specsData,
@@ -46,63 +51,15 @@ const FilterSidebar = memo(({ modal }) => {
 		error: skillsError,
 	} = useGetSkillsQuery();
 
-	const skills = skillsData?.data;
-
-	const updateFiltersWithSearch = useCallback(
-		patch => {
-			updateFilters({
-				...filters,
-				...patch,
-			});
-		},
-		[filters, updateFilters],
-	);
+	const toggleSpecialization = useSpecializationToggle(filters, updateFilters);
+	const toggleSkills = useSkillsToggle(filters, updateFilters);
+	const toggleComplexity = useComplexityToggle(filters, updateFilters);
 
 	const handleSearchChange = useCallback(
 		value => {
-			updateFilters({ ...filters, search: value });
+			updateFilters({ search: value });
 		},
-		[filters, updateFilters],
-	);
-
-	const handleSpecializationToggle = useCallback(
-		id => {
-			const currentIds = Array.isArray(filters.specializationId)
-				? filters.specializationId
-				: [];
-			const newIds = currentIds.includes(id)
-				? currentIds.filter(i => i !== id)
-				: [...currentIds, id];
-
-			updateFiltersWithSearch({ specializationId: newIds });
-		},
-		[filters.specializationId, updateFiltersWithSearch],
-	);
-
-	const handleSkillToggle = useCallback(
-		id => {
-			const currentIds = Array.isArray(filters.skills) ? filters.skills : [];
-			const newIds = currentIds.includes(id)
-				? currentIds.filter(i => i !== id)
-				: [...currentIds, id];
-
-			updateFiltersWithSearch({ skills: newIds });
-		},
-		[filters.skills, updateFiltersWithSearch],
-	);
-
-	const handleComplexityToggle = useCallback(
-		range => {
-			const current = Array.isArray(filters.complexity)
-				? filters.complexity
-				: [];
-			const newRanges = current.includes(range)
-				? current.filter(r => r !== range)
-				: [...current, range];
-
-			updateFiltersWithSearch({ complexity: newRanges });
-		},
-		[filters.complexity, updateFiltersWithSearch],
+		[updateFilters],
 	);
 
 	const handleRatingToggle = useCallback(
@@ -112,16 +69,16 @@ const FilterSidebar = memo(({ modal }) => {
 				? current.filter(r => r !== rate)
 				: [...current, rate];
 
-			updateFiltersWithSearch({ rate: newRating });
+			updateFilters({ rate: newRating });
 		},
-		[filters.rate, updateFiltersWithSearch],
+		[filters.rate, updateFilters],
 	);
 
 	const handleStatusChange = useCallback(
 		newStatus => {
-			updateFiltersWithSearch({ status: newStatus });
+			updateFilters({ status: newStatus });
 		},
-		[updateFiltersWithSearch],
+		[updateFilters],
 	);
 
 	if (specsLoad || skillsLoad) {
@@ -172,14 +129,14 @@ const FilterSidebar = memo(({ modal }) => {
 							? filters.specializationId
 							: []
 					}
-					onToggle={handleSpecializationToggle}
+					onToggle={toggleSpecialization}
 				/>
 
 				<FilterGroup
 					title='Навыки'
-					items={skills}
+					items={skillsData?.data}
 					selectedIds={Array.isArray(filters.skills) ? filters.skills : []}
-					onToggle={handleSkillToggle}
+					onToggle={toggleSkills}
 				/>
 
 				<FilterGroup
@@ -188,7 +145,7 @@ const FilterSidebar = memo(({ modal }) => {
 					selectedIds={
 						Array.isArray(filters.complexity) ? filters.complexity : []
 					}
-					onToggle={handleComplexityToggle}
+					onToggle={toggleComplexity}
 				/>
 
 				<FilterGroup
