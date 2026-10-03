@@ -1,0 +1,28 @@
+@use '@/app/styles/variables' as vars;
+
+.skeleton {
+	display: block;
+	background: linear-gradient(
+		90deg,
+		vars.$background-gray 0%,
+		vars.$background-white,
+		vars.$background-gray 100%
+	);
+	background-size: 200% 100%;
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.skeleton {
+		animation: none;
+	}
+}

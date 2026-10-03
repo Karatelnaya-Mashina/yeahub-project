@@ -1,6 +1,7 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useGetQuestionIdQuery } from '@/entities/questions';
 
+import QuestionDetailPageSkeleton from './QuestionDetailPageSkeleton/QuestionDetailPageSkeleton';
 import QuestionNavigation from './QuestionNavigation/QuestionNavigation';
 import QuestionAnswer from './QuestionAnswer/QuestionAnswer';
 import QuestionInfo from './QuestionInfo/QuestionInfo';
@@ -19,16 +20,12 @@ const QuestionDetailPage = () => {
 
 	const listQuestions = location.state.questions;
 
-	const handlePrevPage = () => {
-		navigate(-1);
-	};
-
-	if (isLoading) return <div>Загрузка...</div>;
+	if (isLoading) return <QuestionDetailPageSkeleton />;
 	if (isError || !question) return <div>Ошибка загрузки вопроса</div>;
 
 	return (
 		<div className={styles.detail}>
-			<button onClick={handlePrevPage} className={styles.prev}>
+			<button onClick={() => navigate('/questions')} className={styles.prev}>
 				<Icon name='prevArrow' />
 				<p>Назад</p>
 			</button>

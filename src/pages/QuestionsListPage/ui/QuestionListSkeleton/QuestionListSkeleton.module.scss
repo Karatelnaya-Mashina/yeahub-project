@@ -1,0 +1,57 @@
+@use '@/app/styles/variables' as vars;
+
+.list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 63%;
+	padding: 1.5625em 1.25em 2.5em 1.25em;
+	border-radius: 24px;
+	background-color: vars.$background-white;
+
+	&__header {
+		width: 100%;
+		padding-bottom: 1.5em;
+	}
+}
+
+.card {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75em;
+}
+
+.cardItem {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1em 1.25em;
+	border-radius: 12px;
+	background: vars.$background-gray;
+
+	&__left {
+		display: flex;
+		align-items: center;
+		gap: 0.75em;
+		flex: 1;
+	}
+}
+
+.pagination {
+	display: flex;
+	gap: 0.5em;
+	margin-top: 1.5em;
+}
+
+@media (max-width: 768px) {
+	.list {
+		width: 42.25em;
+	}
+}
+@media (max-width: 360px) {
+	.list {
+		width: 20em;
+		padding: 1.25em 0.25em;
+	}
+}

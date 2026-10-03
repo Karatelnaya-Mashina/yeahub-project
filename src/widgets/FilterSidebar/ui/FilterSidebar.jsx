@@ -1,6 +1,8 @@
 import { useCallback, memo } from 'react';
 import { useFiltersItems } from '@/entities/questions';
 
+import FilterSidebarSkeleton from './FilterSidebarSkeleton/FilterSidebarSkeleton';
+
 import {
 	useGetSkillsQuery,
 	useGetSpecializationsQuery,
@@ -81,14 +83,7 @@ const FilterSidebar = memo(({ modal }) => {
 		[updateFilters],
 	);
 
-	if (specsLoad || skillsLoad) {
-		return (
-			<div className={styles.loading}>
-				<div className={styles.spinner}></div>
-				<p>Загрузка...</p>
-			</div>
-		);
-	}
+	if (specsLoad || skillsLoad) return <FilterSidebarSkeleton />;
 
 	if (specsError || skillsError) {
 		return (

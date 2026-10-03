@@ -1,5 +1,6 @@
 import QuestionCard from '../QuestionCard/QuestionCard';
 import Pagination from '../Pagination/Pagination';
+import QuestionListSkeleton from '../QuestionListSkeleton/QuestionListSkeleton';
 
 import Icon from '@/shared/ui/Icon';
 
@@ -15,14 +16,7 @@ const QuestionList = ({
 	onPageChange,
 	openModal,
 }) => {
-	if (loading) {
-		return (
-			<div className={styles.loading}>
-				<div className={styles.spinner}></div>
-				<p>Загрузка вопросов...</p>
-			</div>
-		);
-	}
+	if (loading) return <QuestionListSkeleton count={5} />;
 
 	if (error) {
 		return (

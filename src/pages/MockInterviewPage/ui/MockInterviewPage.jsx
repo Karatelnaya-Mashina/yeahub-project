@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import MockInterviewPageSkeleton from './MockInterviewPageSkeleton/MockInterviewPageSkeleton';
+
 import { useGetQuizQuestionQuery } from '@/entities/quiz';
 import { useGetSpecializationsQuery } from '@/entities/questions';
 import { useGetSkillsQuery } from '@/entities/questions/api/skillsApi';
@@ -31,14 +33,13 @@ const MODE_ITEMS = [
 
 const MockInterviewPage = () => {
 	const [count, setCount] = useState(1);
+	const { filters, updateFiltersQuiz } = useFiltersQuiz();
 
 	const {
 		data: quiz,
 		isLoading: loadQuiz,
 		error: errorQuiz,
-	} = useGetQuizQuestionQuery();
-
-	const { filters, updateFiltersQuiz } = useFiltersQuiz();
+	} = useGetQuizQuestionQuery(filters);
 
 	const {
 		data: specs,
@@ -70,7 +71,7 @@ const MockInterviewPage = () => {
 		setCount(prev => prev + value);
 	};
 
-	if (specsLoad || skillsLoad) return <div>Загрузка...</div>;
+	if (specsLoad || skillsLoad) return <MockInterviewPageSkeleton />;
 	if (specsError || skillsError) return <div>Ошибка загрузки</div>;
 
 	return (
@@ -133,7 +134,11 @@ const MockInterviewPage = () => {
 				</div>
 			</div>
 			<div className={styles.start}>
-				<Link to='/mock-interview/quiz' className={styles.start_link}>
+				<Link
+					to='/mock-interview/quiz'
+					className={styles.start_link}
+					state={{ quiz, loadQuiz, errorQuiz }}
+				>
 					<p>Начать</p>
 					<Icon name='nextArrow' />
 				</Link>
