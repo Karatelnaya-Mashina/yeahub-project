@@ -6,6 +6,7 @@ export const useFiltersQuiz = () => {
 
 	const filters = useMemo(
 		() => ({
+			limit: Number(searchParams.get('limit')) || 10,
 			specializationId: searchParams.get('specializationId')
 				? searchParams.get('specializationId').split(',').map(Number)
 				: [],
@@ -22,6 +23,7 @@ export const useFiltersQuiz = () => {
 			const params = new URLSearchParams(searchParams);
 
 			const map = {
+				limit: 'limit',
 				specializationId: 'specializationId',
 				skills: 'skills',
 				complexity: 'complexity',
@@ -33,6 +35,10 @@ export const useFiltersQuiz = () => {
 				if (!paramKey) return;
 				params.delete(paramKey);
 			});
+
+			if (partialFilters.limit != null) {
+				params.set('limit', String(partialFilters.limit));
+			}
 
 			if (partialFilters.specializationId?.length) {
 				params.set(
@@ -46,7 +52,7 @@ export const useFiltersQuiz = () => {
 			if (partialFilters.complexity?.length) {
 				params.set('complexity', partialFilters.complexity.join(','));
 			}
-			if (partialFilters.mode && partialFilters.mode !== 'Все') {
+			if (partialFilters.mode && partialFilters.mode !== 'Случайные') {
 				params.set('mode', partialFilters.mode);
 			}
 

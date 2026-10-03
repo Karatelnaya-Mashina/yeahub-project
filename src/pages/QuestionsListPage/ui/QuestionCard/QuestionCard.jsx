@@ -1,11 +1,12 @@
 import { useState, memo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Icon from '@/shared/ui/Icon';
 import styles from './QuestionCard.module.scss';
 
-const QuestionCard = memo(({ question, questions }) => {
+const QuestionCard = memo(({ question }) => {
 	const [isReveal, setIsReveal] = useState(false);
+	const location = useLocation();
 
 	const handleRevealAnswer = () => {
 		setIsReveal(prev => !prev);
@@ -65,9 +66,8 @@ const QuestionCard = memo(({ question, questions }) => {
 					</div>
 					<div className={styles.detail}>
 						<Link
-							to={`/${question.id}`}
+							to={`/${question.id}${location.search}`}
 							className={styles.detail}
-							state={{ questions }}
 						>
 							Подробнее
 						</Link>

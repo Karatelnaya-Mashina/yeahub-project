@@ -5,6 +5,7 @@ export const quizApi = baseApi.injectEndpoints({
 		getQuizQuestion: builder.query({
 			query: (params = {}) => {
 				const {
+					limit = 10,
 					specializationId = [],
 					skills = [],
 					complexity = [],
@@ -12,6 +13,7 @@ export const quizApi = baseApi.injectEndpoints({
 				} = params;
 
 				const queryParams = { mode };
+				if (limit) queryParams.limit = limit;
 				if (specializationId?.length)
 					queryParams.specializationId = specializationId;
 				if (skills?.length) queryParams.skills = skills;

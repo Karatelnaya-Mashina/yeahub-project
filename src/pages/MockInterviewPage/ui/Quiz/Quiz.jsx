@@ -1,8 +1,8 @@
-import { useLocation } from 'react-router-dom';
+import { useFiltersQuiz } from '@/entities/quiz/model/useFiltersQuiz';
 
 const Quiz = () => {
-	const location = useLocation();
-	console.log(location.state);
+	const { filters } = useFiltersQuiz();
+	console.log(filters);
 
 	return <div>Quiz</div>;
 };

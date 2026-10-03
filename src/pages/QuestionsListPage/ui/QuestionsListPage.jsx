@@ -12,7 +12,8 @@ import styles from './QuestionsListPage.module.scss';
 export default function QuestionsListPage() {
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const { filteredQuestions, total, initialLoading, error } = useQuestions();
+	const { filteredQuestions, total, initialLoading, error, refetch } =
+		useQuestions();
 
 	const { handleResetFilters } = useFiltersItems();
 
@@ -42,6 +43,7 @@ export default function QuestionsListPage() {
 					total={total}
 					loading={initialLoading}
 					error={error}
+					onRetry={refetch}
 					onReset={handleResetFilters}
 					currentPage={currentPage}
 					onPageChange={handlePageChange}

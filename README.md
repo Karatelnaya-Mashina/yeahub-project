@@ -1,6 +1,16 @@
 # Yeahub-project
 
+### v. 1.6
+
 ## ✨ Добавлено:
+
+### v. 1.5:
+
+1. Добавил Скелетоны к существующим страницам
+
+### v. 1.6:
+
+1. Добавил общий компонент (ErrorState) для отслеживания ошибок при загрузки данных
 
 ## 🐛 Исправлено:
 
@@ -33,9 +43,11 @@
 1. Перенес часть кода из useQuiz в папке entities/quiz, в новый хук useFiltersQuiz
 2. Вынес отдельными кастомными хуками обработку фильтров из FiltersSidebar (useComplexityToggle, useSkillsToggle, useSpecializationToggle), для пере использования в MockInterviewPage
 
+### v. 1.6:
+
+1. Заменил способ передачи данных (был через state в ссылке) с страницы на страницу (QuestionCard -> QuestionDetailPage и MockInterviewPage -> Quiz)
+
 ## 🧑‍💻 Задачи:
 
 1. Дополнить MockInterviewPage (сделать quiz)
-2. Сделать скелетон для загрузок
-3. Переделать страницы main
-4. Проверить двойные вызовы
+2. Сделать страницу Main

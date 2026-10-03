@@ -1,0 +1,79 @@
+@use '@/app/styles/variables' as vars;
+
+.error {
+	width: 100%;
+	max-width: 32em;
+	margin: 0 auto;
+	padding: 2.5em 2em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 0.75em;
+	background: vars.$error-background-color;
+	border: vars.$error-border;
+	border-radius: 24px;
+
+	&__icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 3.5em;
+		height: 3.5em;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.6);
+	}
+
+	&__title {
+		font-size: 1.25em;
+		font-weight: vars.$font-weight-bold;
+		color: vars.$error-color;
+	}
+
+	&__message {
+		font-size: vars.$font-size-base;
+		color: vars.$error-color;
+		opacity: 0.9;
+		line-height: 130%;
+	}
+
+	&__status {
+		font-size: vars.$font-size-small;
+		color: vars.$color-text-gray;
+	}
+
+	&__actions {
+		display: flex;
+		gap: 0.75em;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin-top: 0.5em;
+	}
+
+	&__btn {
+		padding: 0.75em 1.5em;
+		border: none;
+		border-radius: 12px;
+		background: vars.$purple-color;
+		color: vars.$color-text-white;
+		font-size: vars.$font-size-base;
+		font-weight: vars.$font-weight-medium;
+		cursor: pointer;
+		transition: box-shadow 0.2s;
+
+		&:hover {
+			box-shadow: 0px 1px 5px 1px vars.$purple-color;
+		}
+
+		&_ghost {
+			background: transparent;
+			color: vars.$purple-color;
+			border: 1px solid vars.$purple-color;
+
+			&:hover {
+				background: vars.$purple-color;
+				color: vars.$color-text-white;
+			}
+		}
+	}
+}

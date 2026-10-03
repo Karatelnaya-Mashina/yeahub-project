@@ -1,27 +1,46 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useGetQuestionIdQuery } from '@/entities/questions';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+	useGetQuestionsQuery,
+	useGetQuestionIdQuery,
+} from '@/entities/questions';
+import { useFiltersItems } from '@/entities/questions';
 
 import QuestionDetailPageSkeleton from './QuestionDetailPageSkeleton/QuestionDetailPageSkeleton';
 import QuestionNavigation from './QuestionNavigation/QuestionNavigation';
 import QuestionAnswer from './QuestionAnswer/QuestionAnswer';
 import QuestionInfo from './QuestionInfo/QuestionInfo';
 import QuestionContacts from './QuestionContacts/QuestionContacts';
+import ErrorState from '@/shared/ui/ErrorState/ErrorState';
 
 import Icon from '@/shared/ui/Icon';
 import styles from './QuestionDetailPage.module.scss';
 
 const QuestionDetailPage = () => {
-	const location = useLocation();
+	const { filters } = useFiltersItems();
 	const navigate = useNavigate();
 
 	const { id } = useParams();
 
-	const { data: question, isLoading, isError } = useGetQuestionIdQuery(id);
+	const {
+		data: question,
+		isLoading,
+		error,
+		refetch,
+	} = useGetQuestionIdQuery(id);
 
-	const listQuestions = location.state.questions;
+	const fetchListQuestions = useGetQuestionsQuery(filters);
+	const listQuestions = fetchListQuestions?.data?.data;
 
 	if (isLoading) return <QuestionDetailPageSkeleton />;
-	if (isError || !question) return <div>Ошибка загрузки вопроса</div>;
+	if (error || !question) {
+		return (
+			<ErrorState
+				title='Не удалось загрузить вопрос'
+				error={error}
+				onRetry={() => refetch()}
+			/>
+		);
+	}
 
 	return (
 		<div className={styles.detail}>

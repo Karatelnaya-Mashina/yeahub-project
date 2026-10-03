@@ -14,6 +14,7 @@ import { useComplexityToggle } from '@/shared/lib/hooks/useComplexityToggle';
 
 import FilterGroup from './FilterGroup';
 import SearchInput from '@/shared/ui/SearchInput/SearchInput';
+import ErrorState from '@/shared/ui/ErrorState/ErrorState';
 
 import styles from './FilterSidebar.module.scss';
 
@@ -45,12 +46,14 @@ const FilterSidebar = memo(({ modal }) => {
 		data: specsData,
 		isLoading: specsLoad,
 		error: specsError,
+		refetch: refetchSpecs,
 	} = useGetSpecializationsQuery();
 
 	const {
 		data: skillsData,
 		isLoading: skillsLoad,
 		error: skillsError,
+		refetch: refetchSkills,
 	} = useGetSkillsQuery();
 
 	const toggleSpecialization = useSpecializationToggle(filters, updateFilters);
@@ -87,20 +90,14 @@ const FilterSidebar = memo(({ modal }) => {
 
 	if (specsError || skillsError) {
 		return (
-			<div className={styles.errorQuestions}>
-				{specsError && (
-					<div>
-						Ошибка загрузки специализации: {specsError?.message}. Статус:{' '}
-						{specsError.statusCode}
-					</div>
-				)}
-				{skillsError && (
-					<div>
-						Ошибка загрузки навыков: {skillsError?.message}. Статус:{' '}
-						{skillsError.statusCode}
-					</div>
-				)}
-			</div>
+			<ErrorState
+				title='Не удалось загрузить фильтры'
+				error={specsError || skillsError}
+				onRetry={() => {
+					refetchSpecs();
+					refetchSkills();
+				}}
+			/>
 		);
 	}
 

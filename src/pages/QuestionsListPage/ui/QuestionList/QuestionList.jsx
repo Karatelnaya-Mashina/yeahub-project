@@ -1,6 +1,7 @@
 import QuestionCard from '../QuestionCard/QuestionCard';
 import Pagination from '../Pagination/Pagination';
 import QuestionListSkeleton from '../QuestionListSkeleton/QuestionListSkeleton';
+import ErrorState from '@/shared/ui/ErrorState/ErrorState';
 
 import Icon from '@/shared/ui/Icon';
 
@@ -11,6 +12,7 @@ const QuestionList = ({
 	total,
 	loading,
 	error,
+	onRetry,
 	onReset,
 	currentPage,
 	onPageChange,
@@ -20,9 +22,12 @@ const QuestionList = ({
 
 	if (error) {
 		return (
-			<div className={styles.errorQuestions}>
-				Ошибка загрузки: {error?.message}. Статус: {error.statusCode}
-			</div>
+			<ErrorState
+				title='Не удалось загрузить вопросы'
+				error={error}
+				onRetry={onRetry}
+				onReset={onReset}
+			/>
 		);
 	}
 
@@ -53,11 +58,7 @@ const QuestionList = ({
 
 			<div className={styles.card}>
 				{questions?.map(question => (
-					<QuestionCard
-						key={question.id}
-						question={question}
-						questions={questions}
-					/>
+					<QuestionCard key={question.id} question={question} />
 				))}
 			</div>
 

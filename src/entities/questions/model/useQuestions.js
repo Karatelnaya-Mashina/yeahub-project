@@ -9,6 +9,7 @@ export const useQuestions = () => {
 		data: filteredQuestions,
 		isLoading: initialLoading,
 		error,
+		refetch,
 	} = useGetQuestionsQuery(filters);
 
 	const listQuestionsData = useMemo(
@@ -23,6 +24,7 @@ export const useQuestions = () => {
 		total: filteredQuestions?.total,
 		initialLoading,
 		error: error?.data,
+		refetch,
 		listQuestionsData,
 	};
 };

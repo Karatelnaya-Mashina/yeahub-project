@@ -1,9 +1,6 @@
-import { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useCallback } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-import MockInterviewPageSkeleton from './MockInterviewPageSkeleton/MockInterviewPageSkeleton';
-
-import { useGetQuizQuestionQuery } from '@/entities/quiz';
 import { useGetSpecializationsQuery } from '@/entities/questions';
 import { useGetSkillsQuery } from '@/entities/questions/api/skillsApi';
 import { useFiltersQuiz } from '@/entities/quiz/model/useFiltersQuiz';
@@ -12,7 +9,9 @@ import { useSpecializationToggle } from '@/shared/lib/hooks/useSpecializationTog
 import { useSkillsToggle } from '@/shared/lib/hooks/useSkillsToggle';
 import { useComplexityToggle } from '@/shared/lib/hooks/useComplexityToggle';
 
+import MockInterviewPageSkeleton from './MockInterviewPageSkeleton/MockInterviewPageSkeleton';
 import FilterButtons from './FilterButtons/FilterButtons';
+import ErrorState from '@/shared/ui/ErrorState/ErrorState';
 
 import Icon from '@/shared/ui/Icon';
 
@@ -32,25 +31,21 @@ const MODE_ITEMS = [
 ];
 
 const MockInterviewPage = () => {
-	const [count, setCount] = useState(1);
 	const { filters, updateFiltersQuiz } = useFiltersQuiz();
-
-	const {
-		data: quiz,
-		isLoading: loadQuiz,
-		error: errorQuiz,
-	} = useGetQuizQuestionQuery(filters);
+	const location = useLocation();
 
 	const {
 		data: specs,
 		isLoading: specsLoad,
 		error: specsError,
+		refetch: refetchSpecs,
 	} = useGetSpecializationsQuery();
 
 	const {
 		data: skills,
 		isLoading: skillsLoad,
 		error: skillsError,
+		refetch: refetchSkills,
 	} = useGetSkillsQuery();
 
 	const toggleSpecialization = useSpecializationToggle(
@@ -66,13 +61,30 @@ const MockInterviewPage = () => {
 		},
 		[updateFiltersQuiz],
 	);
-	const handleCount = value => {
-		if ((count <= 1) & (value === -1) || (count >= 10) & (value === 1)) return;
-		setCount(prev => prev + value);
-	};
+
+	const handleLimit = useCallback(
+		value => {
+			const nextValue = Number(filters.limit) + value;
+			if (nextValue < 1 || nextValue > 30) return;
+			updateFiltersQuiz({ limit: nextValue });
+		},
+		[filters.limit, updateFiltersQuiz],
+	);
 
 	if (specsLoad || skillsLoad) return <MockInterviewPageSkeleton />;
-	if (specsError || skillsError) return <div>Ошибка загрузки</div>;
+
+	if (specsError || skillsError) {
+		return (
+			<ErrorState
+				title='Не удалось загрузить данные для собеседования'
+				error={specsError || skillsError}
+				onRetry={() => {
+					refetchSpecs();
+					refetchSkills();
+				}}
+			/>
+		);
+	}
 
 	return (
 		<div className={styles.simulator}>
@@ -117,14 +129,16 @@ const MockInterviewPage = () => {
 						</h4>
 						<div className={styles.numberQuestions_wrapper}>
 							<button
-								onClick={() => handleCount(-1)}
+								onClick={() => handleLimit(-1)}
 								className={styles.numberQuestions_btn}
 							>
 								<Icon name='minus' />
 							</button>
-							<div className={styles.numberQuestions_number}>{count}</div>
+							<div className={styles.numberQuestions_number}>
+								{filters.limit}
+							</div>
 							<button
-								onClick={() => handleCount(1)}
+								onClick={() => handleLimit(1)}
 								className={styles.numberQuestions_btn}
 							>
 								<Icon name='plus' />
@@ -135,9 +149,8 @@ const MockInterviewPage = () => {
 			</div>
 			<div className={styles.start}>
 				<Link
-					to='/mock-interview/quiz'
+					to={`/mock-interview/quiz${location.search}`}
 					className={styles.start_link}
-					state={{ quiz, loadQuiz, errorQuiz }}
 				>
 					<p>Начать</p>
 					<Icon name='nextArrow' />
