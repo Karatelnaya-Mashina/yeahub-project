@@ -90,14 +90,16 @@ const FilterSidebar = memo(({ modal }) => {
 
 	if (specsError || skillsError) {
 		return (
-			<ErrorState
-				title='Не удалось загрузить фильтры'
-				error={specsError || skillsError}
-				onRetry={() => {
-					refetchSpecs();
-					refetchSkills();
-				}}
-			/>
+			<>
+				<ErrorState
+					title='Не удалось загрузить фильтры'
+					error={specsError || skillsError}
+					onRetry={() => {
+						refetchSpecs();
+						refetchSkills();
+					}}
+				/>
+			</>
 		);
 	}
 

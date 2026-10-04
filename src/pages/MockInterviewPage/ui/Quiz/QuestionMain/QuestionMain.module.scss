@@ -1,0 +1,56 @@
+@use '@/app/styles/variables.scss' as vars;
+
+.questionMain {
+	margin: 1.5em 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.questionQuiz {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.quiz {
+	&_title {
+		color: vars.$color-text-black;
+		font-weight: vars.$font-weight-medium;
+		font-size: 20px;
+	}
+}
+
+.answer {
+	margin-top: 1em;
+	&_btn {
+		color: vars.$color-text-black;
+		font-weight: vars.$font-weight-regular;
+		font-size: vars.$font-size-base;
+		color: vars.$purple-color;
+		border: none;
+	}
+}
+.action {
+	display: flex;
+	gap: 8px;
+	&_btn {
+		padding: 12px;
+		display: flex;
+		gap: 8px;
+		border: none;
+
+		&:not([data-active='true']):hover {
+			color: vars.$purple-color;
+			svg path {
+				fill: vars.$purple-color;
+			}
+		}
+
+		&[data-active='true'] {
+			color: vars.$purple-color;
+
+			svg path {
+				fill: vars.$purple-color;
+			}
+		}
+	}
+}

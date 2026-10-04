@@ -1,7 +1,10 @@
 $purple-color: #6a0bff;
 $purple-dot: #5533ff;
+$purple-white: rgba(225, 206, 255, 1);
 $background-white: #fff;
 $background-gray: #f5f5f5;
+$background-red-white: rgba(253, 216, 225, 1);
+$background-red-grey: rgb(239, 171, 188);
 
 $color-text-white: #fff;
 $color-text-black: #1f1f1f;
@@ -17,7 +20,7 @@ $font-weight-bold: 600;
 
 $error-background-color: rgba(231, 76, 60, 0.08);
 $error-border: 1px solid rgba(231, 76, 60, 0.3);
-$error-color: #e74c3c;
+$error-color: #f3164e;
 
 // offline
 // @font-face {
