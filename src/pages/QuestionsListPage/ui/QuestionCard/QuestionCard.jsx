@@ -25,7 +25,7 @@ const QuestionCard = memo(({ question }) => {
 					<div
 						className={`${styles.arrowWrapper} ${isReveal ? styles.rotated : ''}`}
 					>
-						<Icon name='arrowWrapper' />
+						<Icon name='arrowDown' />
 					</div>
 				</button>
 			</div>
@@ -55,7 +55,7 @@ const QuestionCard = memo(({ question }) => {
 						)}
 
 						<div className={styles.additionalFunction}>
-							<button className={styles.additionalFunction__btn}>
+							<button className={styles.additionalFunction_btn}>
 								<Icon name='btnAdditionalFunction' />
 							</button>
 						</div>

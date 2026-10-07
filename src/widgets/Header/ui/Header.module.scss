@@ -17,10 +17,15 @@
 }
 .logo {
 	display: flex;
-	width: 9em;
+	width: 10em;
 	height: 2em;
+	&_img {
+		width: 3em;
+		height: 2em;
+	}
 	&_text {
-		margin-left: 0.5em;
+		width: 9em;
+		height: 2em;
 	}
 }
 .list {
@@ -94,15 +99,15 @@
 			display: none;
 		}
 		&_tablet {
-			width: 7.5em;
-			height: 1.5em;
-			display: flex;
+			display: block;
 		}
 		.preparation {
 			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 8px;
 			border: none;
 			font-weight: vars.$font-weight-medium;
-			line-height: 140%;
 			color: vars.$color-text-black;
 			background: #fff;
 		}

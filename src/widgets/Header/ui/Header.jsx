@@ -9,7 +9,7 @@ const Header = () => {
 			<div className={styles.left}>
 				<Link to='/'>
 					<div className={styles.logo}>
-						<Icon name='logo' />
+						<Icon name='logo' className={styles.logo_img} />
 						<Icon
 							name='logoText'
 							className={`${styles.logo_text} ${styles.logo_text_none}`}

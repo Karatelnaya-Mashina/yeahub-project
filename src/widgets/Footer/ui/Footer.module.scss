@@ -8,8 +8,18 @@
 	background: rgba(24, 0, 62, 1);
 }
 .logo {
-	width: 5.875em;
-	height: 1.25em;
+	margin: 0;
+	padding: 0;
+	width: 7em;
+	height: 2em;
+
+	svg {
+		width: 90%;
+		height: 100%;
+		path {
+			fill: #fff;
+		}
+	}
 }
 .choice {
 	margin-top: 2.25em;

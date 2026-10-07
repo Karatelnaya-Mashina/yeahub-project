@@ -10,6 +10,7 @@ import { QuestionsListPage } from '@/pages/QuestionsListPage';
 import { QuestionDetailPage } from '@/pages/QuestionDetailPage';
 import { MockInterviewPage } from '@/pages/MockInterviewPage';
 import { Quiz } from '@/pages/MockInterviewPage';
+import { ResultQuiz } from '@/pages/MockInterviewPage';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
 			<Route path='/:id' element={<QuestionDetailPage />} />
 			<Route path='mock-interview' element={<MockInterviewPage />} />
 			<Route path='/mock-interview/quiz' element={<Quiz />} />
+			<Route path='/mock-interview/quiz/result' element={<ResultQuiz />} />
 		</Route>,
 	),
 );

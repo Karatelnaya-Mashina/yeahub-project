@@ -52,7 +52,7 @@ const QuestionDetailPage = () => {
 				<main className={styles.main}>
 					<header className={styles.header}>
 						<div className={styles.header_icon}>
-							<Icon name='imgTitle' />
+							<Icon name='figma3D' />
 						</div>
 						<div className={styles.header_heading}>
 							<h2 className={styles.header_title}>{question?.title}</h2>

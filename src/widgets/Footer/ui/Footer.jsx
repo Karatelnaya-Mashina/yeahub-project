@@ -5,7 +5,7 @@ const Footer = () => {
 	return (
 		<footer className={styles.footer}>
 			<div className={styles.logo}>
-				<Icon name='logo' />
+				<Icon name='logoText' />
 			</div>
 			<p className={styles.choice}>
 				Выбери, каким будет IT завтра, вместе с нами
@@ -30,10 +30,10 @@ const Footer = () => {
 						<Icon name='telegram' />
 					</a>
 					<a href=''>
-						<Icon name='youtube' />
+						<Icon name='youtubeWhite' />
 					</a>
 					<a href=''>
-						<Icon name='tik-tok' />
+						<Icon name='tikTok' />
 					</a>
 					<a href=''>
 						<Icon name='github' />

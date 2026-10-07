@@ -1,13 +1,12 @@
 import { useState } from 'react';
 
+import BtnAnswer from '@/shared/ui/BtnAnswer/BtnAnswer';
 import Icon from '@/shared/ui/Icon';
 
 import styles from './QuestionMain.module.scss';
 
 const QuestionMain = ({ question, answer, onAnswer }) => {
 	const [showAnswer, setShowAnswers] = useState(false);
-
-	console.log(question);
 
 	return (
 		<div className={styles.questionMain}>
@@ -25,26 +24,28 @@ const QuestionMain = ({ question, answer, onAnswer }) => {
 					</div>
 				</div>
 				<div className={styles.action}>
-					<button
+					<BtnAnswer
 						className={styles.action_btn}
-						onClick={() => onAnswer('know')}
-						data-active={answer === 'know'}
-					>
-						<Icon name='like' />
-						<p>Знаю</p>
-					</button>
-					<button
+						name='like'
+						p='Знаю'
+						onAnswer={() => onAnswer('know')}
+						active={answer === 'know'}
+					/>
+
+					<BtnAnswer
+						name='dislike'
+						p='Не знаю'
 						className={styles.action_btn}
-						onClick={() => onAnswer('dont-know')}
-						data-active={answer === 'dont-know'}
+						onAnswer={() => onAnswer('dont-know')}
+						active={answer === 'dont-know'}
 					>
 						<Icon name='dislike' />
 						<p>Не знаю</p>
-					</button>
+					</BtnAnswer>
 				</div>
 			</div>
 			<div className={styles.questionImg}>
-				<Icon name='woman' />
+				<Icon name='womanImg' />
 			</div>
 		</div>
 	);

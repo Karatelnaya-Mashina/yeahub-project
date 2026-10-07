@@ -32,25 +32,11 @@
 .action {
 	display: flex;
 	gap: 8px;
-	&_btn {
-		padding: 12px;
-		display: flex;
-		gap: 8px;
-		border: none;
+}
 
-		&:not([data-active='true']):hover {
-			color: vars.$purple-color;
-			svg path {
-				fill: vars.$purple-color;
-			}
-		}
-
-		&[data-active='true'] {
-			color: vars.$purple-color;
-
-			svg path {
-				fill: vars.$purple-color;
-			}
-		}
+.questionImg {
+	svg {
+		width: 30em;
+		height: 15em;
 	}
 }

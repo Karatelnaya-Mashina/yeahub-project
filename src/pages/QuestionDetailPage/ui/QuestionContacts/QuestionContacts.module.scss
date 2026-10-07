@@ -12,7 +12,12 @@
 	&__wrapper {
 		header {
 			display: flex;
+			align-items: center;
 			gap: 0.5em;
+			svg {
+				width: 3em;
+				height: 3em;
+			}
 
 			.title {
 				.name {

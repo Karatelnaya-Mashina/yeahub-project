@@ -49,6 +49,7 @@
 
 			button {
 				padding: 10px 12px;
+
 				display: flex;
 				align-items: center;
 				gap: 0.125em;
@@ -58,6 +59,11 @@
 				color: rgba(48, 48, 48, 1);
 				font-size: vars.$font-size-base;
 				font-weight: vars.$font-weight-medium;
+
+				svg {
+					width: 2em;
+					height: 2em;
+				}
 			}
 		}
 	}
