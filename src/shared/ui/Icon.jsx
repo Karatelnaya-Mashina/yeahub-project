@@ -22,6 +22,7 @@ import Like from '../assets/icons/like.svg';
 import Dislike from '../assets/icons/dislike.svg';
 import WomanImg from '../assets/icons/womanImg.svg';
 import QuestionImage from '../assets/icons/questionImage.svg';
+import ModalContainer from '../assets/icons/modalContainer.svg';
 
 const ICONS = {
 	logo: Logo,
@@ -48,6 +49,7 @@ const ICONS = {
 	dislike: Dislike,
 	womanImg: WomanImg,
 	questionImage: QuestionImage,
+	modalContainer: ModalContainer,
 };
 
 const Icon = ({ name, className = '' }) => {

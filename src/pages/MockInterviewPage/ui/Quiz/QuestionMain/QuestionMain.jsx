@@ -38,10 +38,7 @@ const QuestionMain = ({ question, answer, onAnswer }) => {
 						className={styles.action_btn}
 						onAnswer={() => onAnswer('dont-know')}
 						active={answer === 'dont-know'}
-					>
-						<Icon name='dislike' />
-						<p>Не знаю</p>
-					</BtnAnswer>
+					/>
 				</div>
 			</div>
 			<div className={styles.questionImg}>

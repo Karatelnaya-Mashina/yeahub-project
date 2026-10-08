@@ -10,7 +10,7 @@ const Dashboard = () => {
 				<h4 className={styles.statistics_title}>
 					Статистика пройденных вопросов
 				</h4>
-				<CircleProgress percent={75} />
+				<CircleProgress percent={10} />
 
 				<div className={styles.statistics__summary}>
 					<div className={styles.statistics__summary_item}>

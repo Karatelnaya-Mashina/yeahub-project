@@ -2,6 +2,7 @@
 
 .resultQuiz {
 	padding: 2.5em 7em;
+	position: relative;
 }
 .studyMode {
 	padding: 1.5em;
@@ -65,7 +66,7 @@
 			box-shadow: 0px 4px 10px 0px rgba(106, 99, 118, 0.1);
 			p {
 				color: rgba(140, 140, 140, 1);
-				font-size: 11px;
+				font-size: vars.$font-size-base;
 				font-weight: vars.$font-weight-medium;
 				white-space: nowrap;
 			}
@@ -155,17 +156,27 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 16px 20px;
+
 		.item {
 			width: 48%;
 			height: 11em;
 			display: flex;
+			align-items: center;
+			justify-content: center;
 			gap: 20px;
+			border-radius: 24px;
+			box-shadow: 0px 4px 10px 0px rgba(106, 99, 118, 0.1);
+			&:hover {
+				box-shadow: 0px 4px 10px 0px vars.$purple-color;
+			}
+
 			svg {
 				width: 10em;
 				height: 10em;
 			}
 			&_box {
 				width: 52%;
+
 				svg {
 					width: 1em;
 					height: 1em;
@@ -173,4 +184,20 @@
 			}
 		}
 	}
+}
+.modalQuiz {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 100;
+}
+.modalOverlay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 99;
 }

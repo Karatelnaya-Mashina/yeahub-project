@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { saveResult } from '@/features/quiz/quizSlice';
+import { STORAGE_KEY } from '@/shared/lib/storage/constantsKEY';
 
 import { useFiltersQuiz } from '@/entities/quiz/model/useFiltersQuiz';
 import { useGetQuizQuestionQuery } from '@/entities/quiz';
+import { saveResult } from '@/features/quiz/quizSlice';
+import { saveToStorage } from '@/shared/lib/storage/localStorage';
 
 import ProgressBar from '@/shared/ui/ProgressBar/ProgressBar';
 import QuestionSteps from './QuestionSteps/QuestionSteps';
@@ -18,12 +20,13 @@ const Quiz = () => {
 	const { data, isLoading, error } = useGetQuizQuestionQuery(filters);
 	const questionsQuiz = data?.questions || [];
 	const [currentIndex, setCurrentIndex] = useState(0);
-	const [answers, setAnswers] = useState({});
+	const [answers, setAnswers] = useState([]);
 	const dispatch = useDispatch();
 
 	const currentQuestion = questionsQuiz[currentIndex];
 	const first = currentIndex === 0;
 	const last = currentIndex === questionsQuiz.length - 1;
+	const currentAnswer = answers.find(a => a.id === currentQuestion.id)?.answer;
 
 	const navigate = useNavigate();
 
@@ -45,14 +48,20 @@ const Quiz = () => {
 	};
 
 	const handleAnswer = value => {
-		setAnswers(prev => ({
-			...prev,
-			[currentQuestion.id]: value,
-		}));
+		setAnswers(prev => {
+			const exists = prev.some(a => a.id === currentQuestion.id);
+			if (exists) {
+				return prev.map(a =>
+					a.id === currentQuestion.id ? { ...a, answer: value } : a,
+				);
+			}
+			return [...prev, { id: currentQuestion.id, answer: value }];
+		});
 	};
 
 	const handleFinish = () => {
 		dispatch(saveResult({ answers, questionsQuiz }));
+		saveToStorage(STORAGE_KEY, { answers, questionsQuiz });
 		return navigate('/mock-interview/quiz/result');
 	};
 
@@ -72,7 +81,7 @@ const Quiz = () => {
 				{currentQuestion && (
 					<QuestionMain
 						question={currentQuestion}
-						answer={answers[currentQuestion.id]}
+						answer={currentAnswer}
 						onAnswer={handleAnswer}
 					/>
 				)}

@@ -10,13 +10,17 @@ const quizSlice = createSlice({
 	initialState,
 	reducers: {
 		saveResult: (state, action) => {
-			const { answers, questionsQuiz } = action.payload;
-			if (answers.length === 0 || questionsQuiz.length === 0) return;
+			const { answers, questions } = action.payload;
+			if (!questions?.length) return;
 			state.answers = answers;
-			state.questions = questionsQuiz;
+			state.questions = questions;
+		},
+		hydrateFromStorage: (state, action) => {
+			state.answers = action.payload.answers ?? {};
+			state.questions = action.payload.questionsQuiz ?? [];
 		},
 	},
 });
 
-export const { saveResult } = quizSlice.actions;
+export const { saveResult, hydrateFromStorage } = quizSlice.actions;
 export const quizReducer = quizSlice.reducer;
