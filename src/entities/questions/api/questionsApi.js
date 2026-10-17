@@ -8,7 +8,6 @@ export const questionsApi = baseApi.injectEndpoints({
 					page = 1,
 					limit = 10,
 					title = '',
-					titleOrDescription = '',
 					specializationId = [],
 					skills = [],
 					complexity = [],
@@ -18,8 +17,6 @@ export const questionsApi = baseApi.injectEndpoints({
 
 				const queryParams = { page, limit };
 				if (title?.trim()) queryParams.title = title.trim();
-				if (titleOrDescription?.trim())
-					queryParams.titleOrDescription = titleOrDescription.trim();
 				if (specializationId?.length)
 					queryParams.specializationId = specializationId;
 				if (skills?.length) queryParams.skills = skills;
@@ -37,35 +34,3 @@ export const questionsApi = baseApi.injectEndpoints({
 });
 
 export const { useGetQuestionsQuery, useLazyGetQuestionsQuery } = questionsApi;
-
-// getSpecializations: builder.query({
-// 			query: (params = {}) => {
-// 				const { page = 1, limit = 100, ...filters } = params;
-// 				return {
-// 					url: 'specializations',
-// 					params: {
-// 						page,
-// 						limit,
-// 						...filters,
-// 					},
-// 				};
-// 			},
-// 		}),
-// 		getSkills: builder.query({
-// 			query: (params = {}) => {
-// 				const { page = 1, limit = 100, ...filters } = params;
-// 				return {
-// 					url: 'skills',
-// 					params: {
-// 						page,
-// 						limit,
-// 						...filters,
-// 					},
-// 				};
-// 			},
-// 		}),
-// 		getQuestionId: builder.query({
-// 			query: id => {
-// 				return { url: `/questions/public-questions/${id}` };
-// 			},
-// 		}),

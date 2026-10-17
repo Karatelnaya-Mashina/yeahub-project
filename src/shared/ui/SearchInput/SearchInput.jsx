@@ -5,8 +5,14 @@ import Icon from '@/shared/ui/Icon';
 
 import styles from './SearchInput.module.scss';
 
-const SearchInput = memo(({ onSearch, initialValue = '' }) => {
-	const [query, setQuery] = useState(initialValue);
+const SearchInput = memo(({ onSearch }) => {
+	const search =
+		new URLSearchParams(window.location.search).get('search') || '';
+	const [query, setQuery] = useState(search);
+
+	useEffect(() => {
+		setQuery(search);
+	}, [search]);
 
 	const debouncedSearch = useMemo(
 		() => debounce(value => onSearch?.(value), 450),

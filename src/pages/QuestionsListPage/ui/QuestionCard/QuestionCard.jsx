@@ -66,7 +66,7 @@ const QuestionCard = memo(({ question }) => {
 					</div>
 					<div className={styles.detail}>
 						<Link
-							to={`/${question.id}${location.search}`}
+							to={`/questions/${question.id}${location.search}`}
 							className={styles.detail}
 						>
 							Подробнее

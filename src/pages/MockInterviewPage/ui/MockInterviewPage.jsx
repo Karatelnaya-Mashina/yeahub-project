@@ -1,9 +1,14 @@
 import { useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { useGetSpecializationsQuery } from '@/entities/questions';
-import { useGetSkillsQuery } from '@/entities/questions/api/skillsApi';
+import {
+	useGetSpecializationsQuery,
+	useGetSkillsQuery,
+} from '@/entities/questions';
+
 import { useFiltersQuiz } from '@/entities/quiz/model/useFiltersQuiz';
+import { startNewQuizSession } from '@/features/quiz/quizSlice';
 
 import { useSpecializationToggle } from '@/shared/lib/hooks/useSpecializationToggle';
 import { useSkillsToggle } from '@/shared/lib/hooks/useSkillsToggle';
@@ -14,7 +19,6 @@ import FilterButtons from './FilterButtons/FilterButtons';
 import ErrorState from '@/shared/ui/ErrorState/ErrorState';
 
 import Icon from '@/shared/ui/Icon';
-
 import styles from './MockInterviewPage.module.scss';
 
 const COMPLEXITY_ITEMS = [
@@ -33,6 +37,8 @@ const MODE_ITEMS = [
 const MockInterviewPage = () => {
 	const { filters, updateFiltersQuiz } = useFiltersQuiz();
 	const location = useLocation();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const {
 		data: specs,
@@ -70,6 +76,19 @@ const MockInterviewPage = () => {
 		},
 		[filters.limit, updateFiltersQuiz],
 	);
+
+	const handleStartQuiz = useCallback(() => {
+		const sessionId = crypto.randomUUID();
+
+		dispatch(
+			startNewQuizSession({
+				sessionId,
+				filters: { ...filters },
+			}),
+		);
+
+		navigate(`/mock-interview/quiz/${sessionId}${location.search}`);
+	}, [dispatch, filters, navigate, location.search]);
 
 	if (specsLoad || skillsLoad) return <MockInterviewPageSkeleton />;
 
@@ -148,13 +167,14 @@ const MockInterviewPage = () => {
 				</div>
 			</div>
 			<div className={styles.start}>
-				<Link
-					to={`/mock-interview/quiz${location.search}`}
+				<button
+					type='button'
+					onClick={handleStartQuiz}
 					className={styles.start_link}
 				>
 					<p>Начать</p>
 					<Icon name='nextArrow' />
-				</Link>
+				</button>
 			</div>
 		</div>
 	);

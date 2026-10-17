@@ -11,7 +11,7 @@ const ErrorState = ({
 	resetLabel = 'Сбросить фильтры',
 	className = '',
 }) => {
-	const errorText = message || error?.message;
+	const errorText = message || error.data?.message;
 
 	const statusCode = error?.status || error?.statusCode;
 
@@ -23,7 +23,11 @@ const ErrorState = ({
 
 			<h3 className={styles.error__title}>{title}</h3>
 
-			{errorText && <p className={styles.error__message}>{errorText}</p>}
+			{errorText && (
+				<div className={styles.error__message}>
+					<p>{errorText}</p>
+				</div>
+			)}
 
 			{statusCode && (
 				<p className={styles.error__status}>Код ошибки: {statusCode}</p>

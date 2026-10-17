@@ -1,21 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import CardsQuiz from './CardsQuiz';
 import Modal from '@/shared/ui/Modal/Modal';
 
 import Icon from '@/shared/ui/Icon';
+import modalContainer from '@/shared/assets/images/modalContainer.webp';
 import styles from './ResultQuiz.module.scss';
 
 const ResultQuiz = () => {
 	const { answers, questions } = useSelector(state => state.quiz);
+
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	useEffect(() => {
 		const start = setTimeout(() => {
 			setIsModalOpen(true);
-			console.log('open');
 		}, 5000);
 		return () => clearTimeout(start);
 	}, []);
@@ -23,6 +25,18 @@ const ResultQuiz = () => {
 	const handleCloseModal = () => {
 		setIsModalOpen(false);
 	};
+
+	const hasResult = questions.length > 0;
+
+	if (!hasResult) {
+		return (
+			<div className={styles.empty}>
+				<h2>Результат не найден</h2>
+				<p>Пройдите собеседование, чтобы увидеть статистику.</p>
+				<Link to='/mock-interview'>Начать заново</Link>
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.resultQuiz}>
@@ -56,7 +70,7 @@ const ResultQuiz = () => {
 					isOpen={isModalOpen}
 					onClose={handleCloseModal}
 				>
-					<Icon name='modalContainer' />
+					<img src={modalContainer} alt='modal' width={702} height={402} />
 				</Modal>
 			)}
 		</div>

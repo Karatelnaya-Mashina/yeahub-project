@@ -2,21 +2,24 @@ import { useNavigate } from 'react-router-dom';
 import BtnAnswer from '@/shared/ui/BtnAnswer/BtnAnswer';
 
 import Icon from '@/shared/ui/Icon';
+import questionImage from '@/shared/assets/images/questionImage.webp';
 import styles from './ResultQuiz.module.scss';
 
 const CardsQuiz = ({ question, answers }) => {
 	const navigate = useNavigate();
-	const indexAnswer = answers.findIndex(answer => answer.id === question.id);
-	const response = answers[indexAnswer].answer;
+	const answer = answers.find(answer => answer.id === question.id)?.answer;
 
 	return (
-		<div onClick={() => navigate(`/${question.id}`)} className={styles.item}>
-			<Icon name='questionImage' />
+		<div
+			onClick={() => navigate(`/questions/${question.id}`)}
+			className={styles.item}
+		>
+			<img src={questionImage} alt='questionImage' width={154} height={154} />
 			<div className={styles.item_box}>
 				<h4 className={styles.item_title}>{question.title}</h4>
 				<BtnAnswer
-					name={response === 'know' ? 'like' : 'dislike'}
-					p={response === 'know' ? 'Знаю' : 'Не знаю'}
+					name={answer === 'know' ? 'like' : 'dislike'}
+					p={answer === 'know' ? 'Знаю' : 'Не знаю'}
 					className={styles.action_btn}
 				/>
 			</div>

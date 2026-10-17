@@ -1,4 +1,5 @@
 import Icon from '@/shared/ui/Icon';
+import contactsAva from '@/shared/assets/images/contactsAva.webp';
 import styles from './QuestionContacts.module.scss';
 
 const QuestionContacts = () => {
@@ -6,7 +7,7 @@ const QuestionContacts = () => {
 		<div className={styles.contacts}>
 			<div className={styles.contacts__wrapper}>
 				<header>
-					<Icon name='contacts' />
+					<img src={contactsAva} alt='contacts' width={45} height={45} />
 					<div className={styles.title}>
 						<p className={styles.name}>Руслан Куянец</p>
 						<p className={styles.spec}>Python Guru</p>

@@ -1,4 +1,4 @@
-import { useGetQuizQuestionQuery } from '../api/quizApi';
+import { useGetQuizQuestionsQuery } from '../api/quizApi';
 import { useFiltersQuiz } from './useFiltersQuiz';
 
 export const useQuiz = () => {
@@ -8,7 +8,7 @@ export const useQuiz = () => {
 		data: filteredQuiz,
 		isLoading,
 		error,
-	} = useGetQuizQuestionQuery(filters);
+	} = useGetQuizQuestionsQuery(filters);
 
 	return {
 		filteredQuiz,

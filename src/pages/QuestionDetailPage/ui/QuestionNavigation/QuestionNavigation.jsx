@@ -1,23 +1,24 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Icon from '@/shared/ui/Icon';
 import styles from './QuestionNavigation.module.scss';
 
 const QuestionNavigation = ({ id, listQuestions }) => {
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const handleChangeQuestion = move => {
+		if (listQuestions.length === 0) return;
+
 		const currentIndex = listQuestions.findIndex(q => q.id === Number(id));
+		if (currentIndex === -1) return;
 
 		const nextIndex = currentIndex + move;
 
 		if (nextIndex < 0 || nextIndex >= listQuestions.length) return;
 
 		const nextId = listQuestions[nextIndex].id;
-
-		navigate(`/${nextId}`, {
-			state: { questions: listQuestions },
-		});
+		navigate(`/questions/${nextId}${location.search}`);
 	};
 	return (
 		<div className={styles.btnWrap}>

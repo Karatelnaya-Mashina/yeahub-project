@@ -21,12 +21,14 @@ const QuestionList = ({
 	if (loading) return <QuestionListSkeleton count={5} />;
 
 	if (error)
-		<ErrorState
-			title='Не удалось загрузить вопросы'
-			error={error}
-			onRetry={onRetry}
-			onReset={onReset}
-		/>;
+		return (
+			<ErrorState
+				title='Не удалось загрузить вопросы'
+				error={error}
+				onRetry={onRetry}
+				onReset={onReset}
+			/>
+		);
 
 	if (questions?.length === 0) {
 		return (

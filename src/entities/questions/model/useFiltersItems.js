@@ -9,7 +9,6 @@ export const useFiltersItems = () => {
 			page: searchParams.get('page') || 1,
 			limit: searchParams.get('limit') || 10,
 			title: searchParams.get('search') || '',
-			titleOrDescription: searchParams.get('search') || '',
 			specializationId: searchParams.get('specializationId')
 				? searchParams.get('specializationId').split(',').map(Number)
 				: [],

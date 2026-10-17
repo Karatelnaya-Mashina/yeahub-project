@@ -23,7 +23,7 @@ export const useQuestions = () => {
 		filteredQuestions: filteredQuestions?.data,
 		total: filteredQuestions?.total,
 		initialLoading,
-		error: error?.data,
+		error,
 		refetch,
 		listQuestionsData,
 	};

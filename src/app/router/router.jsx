@@ -17,9 +17,9 @@ const router = createBrowserRouter(
 		<Route path='/' element={<Layout />}>
 			<Route index element={<MainPage />} />
 			<Route path='questions' element={<QuestionsListPage />} />
-			<Route path='/:id' element={<QuestionDetailPage />} />
+			<Route path='questions/:id' element={<QuestionDetailPage />} />
 			<Route path='mock-interview' element={<MockInterviewPage />} />
-			<Route path='/mock-interview/quiz' element={<Quiz />} />
+			<Route path='/mock-interview/quiz/:id' element={<Quiz />} />
 			<Route path='/mock-interview/quiz/result' element={<ResultQuiz />} />
 		</Route>,
 	),

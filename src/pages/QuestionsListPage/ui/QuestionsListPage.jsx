@@ -1,8 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { useQuestions } from '@/entities/questions';
-import { useFiltersItems } from '@/entities/questions';
+import { useQuestions, useFiltersItems } from '@/entities/questions';
 
 import QuestionList from './QuestionList/QuestionList';
 import { FilterSidebar } from '@/widgets/FilterSidebar';

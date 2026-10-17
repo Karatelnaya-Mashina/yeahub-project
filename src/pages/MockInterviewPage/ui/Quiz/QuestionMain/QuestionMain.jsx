@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
+import MarkdownRenderer from '@/shared/ui/MarkdownRenderer/MarkdownRenderer';
 import BtnAnswer from '@/shared/ui/BtnAnswer/BtnAnswer';
-import Icon from '@/shared/ui/Icon';
+import womanImg from '@/shared/assets/images/womanImg.webp';
 
 import styles from './QuestionMain.module.scss';
 
@@ -14,7 +15,9 @@ const QuestionMain = ({ question, answer, onAnswer }) => {
 				<div className={styles.quiz}>
 					<h4 className={styles.quiz_title}>{question.title}</h4>
 					<div className={styles.answer}>
-						{showAnswer && <p>{question.shortAnswer}</p>}
+						<MarkdownRenderer>
+							{showAnswer && question.shortAnswer}
+						</MarkdownRenderer>
 						<button
 							className={styles.answer_btn}
 							onClick={() => setShowAnswers(!showAnswer)}
@@ -42,7 +45,7 @@ const QuestionMain = ({ question, answer, onAnswer }) => {
 				</div>
 			</div>
 			<div className={styles.questionImg}>
-				<Icon name='womanImg' />
+				<img src={womanImg} alt='woman' width={622} height={358} />
 			</div>
 		</div>
 	);

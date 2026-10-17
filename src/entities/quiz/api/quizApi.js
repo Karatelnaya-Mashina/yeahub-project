@@ -2,7 +2,7 @@ import { baseApi } from '@/shared/api/baseApi';
 
 export const quizApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
-		getQuizQuestion: builder.query({
+		getQuizQuestions: builder.query({
 			query: (params = {}) => {
 				const {
 					limit = 10,
@@ -21,7 +21,7 @@ export const quizApi = baseApi.injectEndpoints({
 				if (mode?.length) queryParams.mode = mode;
 
 				return {
-					url: 'interview-preparation/quizzes/mock/new',
+					url: `interview-preparation/quizzes/mock/new`,
 					params: queryParams,
 				};
 			},
@@ -29,4 +29,4 @@ export const quizApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useGetQuizQuestionQuery } = quizApi;
+export const { useGetQuizQuestionsQuery } = quizApi;

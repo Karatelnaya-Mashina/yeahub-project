@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import MarkdownRenderer from '@/shared/ui/MarkdownRenderer/MarkdownRenderer';
 
 import Icon from '@/shared/ui/Icon';
 import styles from './QuestionAnswer.module.scss';
@@ -18,9 +19,7 @@ const QuestionAnswer = ({ shortAnswer, longAnswer }) => {
 		if (contentRef.current) {
 			const height = contentRef.current.scrollHeight;
 			setFullHeight(height);
-
-			const isOverflow = height > maxHeightDescription;
-			setIsOverflowing(isOverflow);
+			setIsOverflowing(height > maxHeightDescription);
 		}
 	}, [longAnswer]);
 
@@ -30,8 +29,12 @@ const QuestionAnswer = ({ shortAnswer, longAnswer }) => {
 		>
 			<div className={styles.description__shortAnswer}>
 				<p className={styles.description__shortAnswer_title}>Краткий ответ:</p>
-				<p className={styles.description__shortAnswer_short}>{shortAnswer}</p>
+
+				<MarkdownRenderer className={styles.description__shortAnswer_short}>
+					{shortAnswer}
+				</MarkdownRenderer>
 			</div>
+
 			<div
 				ref={contentRef}
 				className={`${styles.description__longAnswer} ${isExpanded ? styles.expanded : ''}`}
@@ -44,12 +47,16 @@ const QuestionAnswer = ({ shortAnswer, longAnswer }) => {
 				<p className={styles.description__longAnswer_title}>
 					Развёрнутый ответ:
 				</p>
-				<p className={styles.description__longAnswer_long}>{longAnswer}</p>
+
+				<MarkdownRenderer className={styles.description__longAnswer_long}>
+					{longAnswer}
+				</MarkdownRenderer>
 			</div>
+
 			{!isExpanded && isOverflowing && <div className={styles.gradientMask} />}
 			{isOverflowing && (
 				<button
-					onClick={() => handleToggleOverflow()}
+					onClick={handleToggleOverflow}
 					className={styles.description__unwrap}
 				>
 					{isExpanded ? <span>Свернуть</span> : <span>Развернуть</span>}
