@@ -1,12 +1,16 @@
 import { useMemo } from 'react';
 
-const usePagination = (total, currentPage, limit = 10) => {
+const usePagination = (
+	total: number,
+	currentPage: number,
+	limit: number = 10,
+) => {
 	const paginationData = useMemo(() => {
 		const totalPages = Math.ceil(total / limit);
 		const adjacentNumbers = 3;
 		const temporaryArrPages = [];
-		const visiblePages = [];
-		let prevValue;
+		const visiblePages: string[] = [];
+		let prevValue: number;
 
 		for (let i = 1; i <= totalPages; i++) {
 			if (
@@ -22,12 +26,12 @@ const usePagination = (total, currentPage, limit = 10) => {
 		temporaryArrPages.forEach(currentValue => {
 			if (prevValue) {
 				if (currentValue - prevValue === 2) {
-					visiblePages.push(prevValue + 1);
+					visiblePages.push(String(prevValue + 1));
 				} else if (currentValue - prevValue !== 1) {
 					visiblePages.push('...');
 				}
 			}
-			visiblePages.push(currentValue);
+			visiblePages.push(String(currentValue));
 			prevValue = currentValue;
 		});
 

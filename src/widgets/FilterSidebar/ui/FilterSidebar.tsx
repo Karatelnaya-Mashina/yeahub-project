@@ -1,5 +1,5 @@
 import { useCallback, memo } from 'react';
-import { useFiltersItems, type Skill } from '@/entities/questions';
+import { useFiltersItems } from '@/entities/questions';
 
 import FilterSidebarSkeleton from './FilterSidebarSkeleton/FilterSidebarSkeleton';
 
@@ -9,8 +9,6 @@ import {
 } from '@/entities/questions';
 
 import { useArrayToggle } from '@/shared/lib/hooks/useArrayToggle';
-import { useSpecializationToggle } from '@/shared/lib/hooks/useSpecializationToggle';
-import { useComplexityToggle } from '@/shared/lib/hooks/useComplexityToggle';
 
 import FilterGroup from './FilterGroup';
 import SearchInput from '@/shared/ui/SearchInput/SearchInput';

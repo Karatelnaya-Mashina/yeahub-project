@@ -10,16 +10,13 @@ import {
 import { useFiltersQuiz } from '@/entities/quiz/model/useFiltersQuiz';
 import { startNewQuizSession } from '@/features/quiz/quizSlice';
 
-import { useSpecializationToggle } from '@/shared/lib/hooks/useSpecializationToggle';
-import { useSkillsToggle } from '@/shared/lib/hooks/useSkillsToggle';
-import { useComplexityToggle } from '@/shared/lib/hooks/useComplexityToggle';
-
 import MockInterviewPageSkeleton from './MockInterviewPageSkeleton/MockInterviewPageSkeleton';
 import FilterButtons from './FilterButtons/FilterButtons';
 import ErrorState from '@/shared/ui/ErrorState/ErrorState';
 
 import Icon from '@/shared/ui/Icon';
 import styles from './MockInterviewPage.module.scss';
+import { useArrayToggle } from '@/shared/lib/hooks/useArrayToggle';
 
 const COMPLEXITY_ITEMS = [
 	{ id: '1-3', title: '1-3' },
@@ -54,12 +51,18 @@ const MockInterviewPage = () => {
 		refetch: refetchSkills,
 	} = useGetSkillsQuery();
 
-	const toggleSpecialization = useSpecializationToggle(
-		filters,
-		updateFiltersQuiz,
+	const toggleSpecialization = useArrayToggle<string | number>(
+		filters.specializationId,
+		newSpec => updateFiltersQuiz({ specializationId: newSpec }),
 	);
-	const toggleSkills = useSkillsToggle(filters, updateFiltersQuiz);
-	const toggleComplexity = useComplexityToggle(filters, updateFiltersQuiz);
+	const toggleSkills = useArrayToggle<string | number>(
+		filters.skills,
+		newSkills => updateFiltersQuiz({ skills: newSkills }),
+	);
+	const toggleComplexity = useArrayToggle<string | number>(
+		filters.complexity,
+		newRanges => updateFiltersQuiz({ complexity: newRanges }),
+	);
 
 	const handleModeChange = useCallback(
 		(newStatus: string) => {
