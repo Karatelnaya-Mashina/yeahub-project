@@ -1,0 +1,30 @@
+import styles from './ProgressBar.module.scss';
+import type { ProgressBarProps } from './ProgressBar.types';
+
+const ProgressBar = ({
+	title,
+	step,
+	fullCount,
+	className,
+}: ProgressBarProps) => {
+	const widthCompleted =
+		fullCount > 0 ? Math.min(100, (step / fullCount) * 100) + 1 : 0;
+	return (
+		<div className={`${styles.progressBar} ${className}`}>
+			<header className={styles.progressBar_header}>
+				<h4 className={styles.progressBar_title}>{title}</h4>
+				<div className={styles.countQuestions}>
+					{step}/{fullCount}
+				</div>
+			</header>
+			<div className={styles.progressBar__indicator}>
+				<div
+					style={{ width: `${widthCompleted}%` }}
+					className={styles.progressBar__indicator_completed}
+				></div>
+			</div>
+		</div>
+	);
+};
+
+export default ProgressBar;
