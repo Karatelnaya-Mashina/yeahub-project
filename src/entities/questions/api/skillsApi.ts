@@ -1,5 +1,5 @@
 import { baseApi } from '@/shared/api/baseApi';
-import type { SkillResponse } from '@/shared/types';
+import type { SkillResponse } from '../';
 
 export const skillsApi = baseApi.injectEndpoints({
 	endpoints: builder => ({

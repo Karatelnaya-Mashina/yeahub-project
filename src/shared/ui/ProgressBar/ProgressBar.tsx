@@ -7,6 +7,7 @@ const ProgressBar = ({
 	fullCount,
 	className,
 }: ProgressBarProps) => {
+	if (!fullCount) return;
 	const widthCompleted =
 		fullCount > 0 ? Math.min(100, (step / fullCount) * 100) + 1 : 0;
 	return (

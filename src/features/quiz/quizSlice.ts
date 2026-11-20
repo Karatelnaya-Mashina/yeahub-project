@@ -1,6 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { Initial } from './quizSlice.types';
+import type { QuizAnswer } from '@/entities/quiz/model/quizApi.types';
+import type { Question } from '@/entities/questions';
 
-const initialState = {
+const initialState: Initial = {
 	activeSessionId: null,
 	answers: [],
 	questions: [],
@@ -11,7 +14,14 @@ const quizSlice = createSlice({
 	name: 'quiz',
 	initialState,
 	reducers: {
-		saveResult: (state, action) => {
+		saveResult: (
+			state,
+			action: PayloadAction<{
+				answers: QuizAnswer[];
+				questions: Question[];
+				sessionId?: string;
+			}>,
+		) => {
 			const { answers, questions, sessionId } = action.payload;
 			if (!questions?.length) return;
 
@@ -37,6 +47,7 @@ const quizSlice = createSlice({
 		},
 		startNewQuizSession: (state, action) => {
 			const { sessionId, filters } = action.payload;
+			console.log(filters);
 
 			state.activeSessionId = sessionId;
 			state.sessions[sessionId] = {

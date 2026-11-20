@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { useGetQuizQuestionsQuery, useFiltersQuiz } from '@/entities/quiz';
 import {
@@ -18,13 +18,17 @@ import SkeletonQuiz from './SkeletonQuiz/SkeletonQuiz';
 import ErrorState from '@/shared/ui/ErrorState/ErrorState';
 
 import styles from './Quiz.module.scss';
+import { useAppSelector } from '@/shared/lib/hooks/redux';
+import type { Question } from '@/entities/questions';
 
 const Quiz = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const { id: sessionId } = useParams();
-	const session = useSelector(state => state.quiz.sessions[sessionId]);
+	const session = useAppSelector(state =>
+		sessionId ? state.quiz.sessions[sessionId] : undefined,
+	);
 	const snapshot = Boolean(session?.questions?.length);
 	const answers = useMemo(() => session?.answers ?? [], [session?.answers]);
 
@@ -37,7 +41,9 @@ const Quiz = () => {
 	);
 
 	const questionsMemo = useMemo(() => data?.questions || [], [data?.questions]);
-	const questionsQuiz = snapshot ? session.questions : questionsMemo;
+	const questionsQuiz: Question[] = snapshot
+		? (session?.questions ?? [])
+		: questionsMemo;
 
 	useEffect(() => {
 		if (!sessionId || !questionsMemo.length) return;
@@ -59,12 +65,12 @@ const Quiz = () => {
 		? answers.find(a => a.id === currentQuestion.id)?.answer
 		: undefined;
 
-	const handleNavigationQuiz = move => {
+	const handleNavigationQuiz = (move: number) => {
 		if (!last && move === 1) setCurrentIndex(prev => prev + 1);
 		if (!first && move === -1) setCurrentIndex(prev => prev - 1);
 	};
 
-	const handleAnswer = value => {
+	const handleAnswer = (value: number) => {
 		if (!currentQuestion || !sessionId) return;
 
 		const exists = answers.some(a => a.id === currentQuestion.id);
@@ -78,8 +84,9 @@ const Quiz = () => {
 	};
 
 	const handleFinish = () => {
+		if (!sessionId) return;
+
 		const result = { answers, questions: questionsQuiz, sessionId };
-		console.log(answers, questionsQuiz);
 
 		dispatch(saveResult(result));
 

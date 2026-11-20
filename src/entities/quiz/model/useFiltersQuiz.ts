@@ -1,25 +1,26 @@
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import type { QuizMode, QuizParams } from './quizApi.types';
 
 export const useFiltersQuiz = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const filters = useMemo(
-		() => ({
+	const filters = useMemo(() => {
+		const spec = searchParams.get('specializationId');
+		const skills = searchParams.get('skills');
+		const complexity = searchParams.get('complexity');
+
+		return {
 			limit: Number(searchParams.get('limit')) || 10,
-			specializationId: searchParams.get('specializationId')
-				? searchParams.get('specializationId').split(',').map(Number)
-				: [],
-			skills: searchParams.get('skills')
-				? searchParams.get('skills').split(',').map(Number)
-				: [],
-			complexity: searchParams.get('complexity')?.split(',') || [],
-			mode: searchParams.get('mode') || 'Случайные',
-		}),
-		[searchParams],
-	);
+			specializationId: spec ? spec.split(',').map(Number) : [],
+			skills: skills ? skills.split(',').map(Number) : [],
+			complexity: complexity ? complexity.split(',') : [],
+			mode: (searchParams.get('mode') as QuizMode) || 'Случайные',
+		} satisfies QuizParams;
+	}, [searchParams]);
+
 	const updateFiltersQuiz = useCallback(
-		partialFilters => {
+		(partialFilters: QuizParams) => {
 			const params = new URLSearchParams(searchParams);
 
 			const map = {
@@ -30,7 +31,9 @@ export const useFiltersQuiz = () => {
 				mode: 'mode',
 			};
 
-			Object.entries(partialFilters).forEach(([key, value]) => {
+			type FilterKey = keyof typeof map;
+
+			(Object.keys(partialFilters) as FilterKey[]).forEach(key => {
 				const paramKey = map[key];
 				if (!paramKey) return;
 				params.delete(paramKey);

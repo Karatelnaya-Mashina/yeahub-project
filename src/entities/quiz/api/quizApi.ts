@@ -1,8 +1,9 @@
 import { baseApi } from '@/shared/api/baseApi';
+import type { QuizParams, QuizResponse } from '../model/quizApi.types';
 
 export const quizApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
-		getQuizQuestions: builder.query({
+		getQuizQuestions: builder.query<QuizResponse, QuizParams | void>({
 			query: (params = {}) => {
 				const {
 					limit = 10,
@@ -10,9 +11,9 @@ export const quizApi = baseApi.injectEndpoints({
 					skills = [],
 					complexity = [],
 					mode = 'Случайные',
-				} = params;
+				} = params ?? {};
 
-				const queryParams = { mode };
+				const queryParams: QuizParams = { mode };
 				if (limit) queryParams.limit = limit;
 				if (specializationId?.length)
 					queryParams.specializationId = specializationId;

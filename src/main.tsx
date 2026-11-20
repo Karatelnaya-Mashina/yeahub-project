@@ -4,7 +4,10 @@ import { Provider } from 'react-redux';
 
 import { STORAGE_KEY } from './shared/lib/storage/constantsKEY';
 import { loadFromStorage } from './shared/lib/storage/localStorage.js';
-import { hydrateFromStorage, deleteSessions } from '@/features/quiz/quizSlice';
+import {
+	hydrateFromStorage,
+	deleteSessions,
+} from '@/features/quiz/quizSlice.ts';
 
 import { store } from '@/app/providers/store.ts';
 import App from './app/App.tsx';

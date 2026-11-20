@@ -9,6 +9,7 @@ import {
 
 import { useFiltersQuiz } from '@/entities/quiz/model/useFiltersQuiz';
 import { startNewQuizSession } from '@/features/quiz/quizSlice';
+import { useArrayToggle } from '@/shared/lib/hooks/useArrayToggle';
 
 import MockInterviewPageSkeleton from './MockInterviewPageSkeleton/MockInterviewPageSkeleton';
 import FilterButtons from './FilterButtons/FilterButtons';
@@ -16,7 +17,7 @@ import ErrorState from '@/shared/ui/ErrorState/ErrorState';
 
 import Icon from '@/shared/ui/Icon';
 import styles from './MockInterviewPage.module.scss';
-import { useArrayToggle } from '@/shared/lib/hooks/useArrayToggle';
+import type { QuizMode } from '@/entities/quiz/model/quizApi.types';
 
 const COMPLEXITY_ITEMS = [
 	{ id: '1-3', title: '1-3' },
@@ -25,7 +26,7 @@ const COMPLEXITY_ITEMS = [
 	{ id: '9-10', title: '9-10' },
 ];
 
-const MODE_ITEMS = [
+const MODE_ITEMS: { id: string; title: string }[] = [
 	{ id: 'Повторение', title: 'Повторение' },
 	{ id: 'Только новые', title: 'Только новые' },
 	{ id: 'Случайные', title: 'Случайные' },
@@ -51,22 +52,21 @@ const MockInterviewPage = () => {
 		refetch: refetchSkills,
 	} = useGetSkillsQuery();
 
-	const toggleSpecialization = useArrayToggle<string | number>(
+	const toggleSpecialization = useArrayToggle<number>(
 		filters.specializationId,
 		newSpec => updateFiltersQuiz({ specializationId: newSpec }),
 	);
-	const toggleSkills = useArrayToggle<string | number>(
-		filters.skills,
-		newSkills => updateFiltersQuiz({ skills: newSkills }),
+	const toggleSkills = useArrayToggle<number>(filters.skills, newSkills =>
+		updateFiltersQuiz({ skills: newSkills }),
 	);
-	const toggleComplexity = useArrayToggle<string | number>(
+	const toggleComplexity = useArrayToggle<string>(
 		filters.complexity,
 		newRanges => updateFiltersQuiz({ complexity: newRanges }),
 	);
 
 	const handleModeChange = useCallback(
 		(newStatus: string) => {
-			updateFiltersQuiz({ mode: newStatus });
+			updateFiltersQuiz({ mode: newStatus as QuizMode });
 		},
 		[updateFiltersQuiz],
 	);

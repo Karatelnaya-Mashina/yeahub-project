@@ -22,6 +22,7 @@ export type {
 	QuestionsParams,
 	Question,
 	QuestionResponse,
+	QuestionsStatus,
 } from './model/questionsApi.types';
 
 export type { Skill, SkillResponse } from './model/skillsApi.types';

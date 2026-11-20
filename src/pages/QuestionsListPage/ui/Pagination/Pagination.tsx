@@ -43,9 +43,9 @@ const Pagination = ({
 				<button
 					key={index}
 					className={`${styles.btnPage} 
-						${currentPage === page ? styles.active : ''} 
+						${String(currentPage) === page ? styles.active : ''} 
 						${page === '...' ? styles.disabledEllipsis : ''}`}
-					onClick={() => handlePageChange(page)}
+					onClick={() => handlePageChange(Number(page))}
 					disabled={page === '...'}
 				>
 					{page}

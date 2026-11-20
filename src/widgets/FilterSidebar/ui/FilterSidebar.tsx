@@ -57,15 +57,15 @@ const FilterSidebar = memo(({ modal = false }: FilterProps) => {
 		refetch: refetchSkills,
 	} = useGetSkillsQuery();
 
-	const toggleSpecialization = useArrayToggle<string | number>(
+	const toggleSpecialization = useArrayToggle<number>(
 		filters.specializationId,
 		newSpec => updateFilters({ specializationId: newSpec }),
 	);
-	const toggleSkills = useArrayToggle<string | number>(
+	const toggleSkills = useArrayToggle<number | string>(
 		filters.skills,
 		newSkills => updateFilters({ skills: newSkills }),
 	);
-	const toggleComplexity = useArrayToggle<string | number>(
+	const toggleComplexity = useArrayToggle<string>(
 		filters.complexity,
 		newRanges => updateFilters({ complexity: newRanges }),
 	);

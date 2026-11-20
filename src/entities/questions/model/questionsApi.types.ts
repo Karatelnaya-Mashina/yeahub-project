@@ -1,6 +1,7 @@
-import type { QuestionsStatus } from '@/widgets/FilterSidebar/ui/filters.types';
 import type { Skill } from './skillsApi.types';
 import type { Specialization } from './specializationsApi.types';
+
+export type QuestionsStatus = 'Все' | 'Изученные' | 'Не изученные';
 
 export interface QuestionsParams {
 	search?: string;
@@ -8,7 +9,7 @@ export interface QuestionsParams {
 	limit?: number;
 	title?: string;
 	specializationId?: number[];
-	skills?: number[];
+	skills?: (number | string)[];
 	complexity?: string[];
 	rate?: number[];
 	status?: QuestionsStatus;

@@ -1,5 +1,5 @@
 import { baseApi } from '@/shared/api/baseApi';
-import type { QuestionResponse, QuestionsParams } from '@/shared/types';
+import type { QuestionResponse, QuestionsParams } from '../';
 
 export const questionsApi = baseApi.injectEndpoints({
 	endpoints: builder => ({

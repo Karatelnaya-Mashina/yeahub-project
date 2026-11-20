@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import type { QuestionsParams, QuestionsStatus } from '@/shared/types';
+import type { QuestionsParams } from '../';
+import type { QuestionsStatus } from '../';
 
 export const useFiltersItems = () => {
 	const [searchParams, setSearchParams] = useSearchParams();

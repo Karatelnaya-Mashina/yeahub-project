@@ -1,15 +1,19 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import styles from './FilterButtons.module.scss';
+import type {
+	BaseFilterBtn,
+	FilterButtonsProps,
+} from '../../model/FilterButtons.types';
 
-const FilterButtons = ({
+const FilterButtons = <T extends BaseFilterBtn>({
 	title,
 	items,
 	selectedIds,
 	selectedId,
 	onToggle,
 	isSingleSelect = false,
-}) => {
+}: FilterButtonsProps<T>) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const initialVisibleCount = 5;
 
@@ -19,14 +23,14 @@ const FilterButtons = ({
 	}, [items, isExpanded]);
 
 	const isActive = useCallback(
-		id => {
-			return isSingleSelect ? selectedId === id : selectedIds.includes(id);
+		(id: number) => {
+			return isSingleSelect ? selectedId === id : selectedIds?.includes(id);
 		},
 		[isSingleSelect, selectedId, selectedIds],
 	);
 
 	const handleClick = useCallback(
-		id => {
+		(id: number) => {
 			onToggle?.(id);
 		},
 		[onToggle],
@@ -43,8 +47,8 @@ const FilterButtons = ({
 				{visibleElements.map(item => (
 					<button
 						key={item.id}
-						className={`${styles.filter_item} ${isActive(item.id) ? styles.active : ''}`}
-						onClick={() => handleClick(item.id)}
+						className={`${styles.filter_item} ${isActive(Number(item.id)) ? styles.active : ''}`}
+						onClick={() => handleClick(Number(item.id))}
 					>
 						{item.title}
 					</button>

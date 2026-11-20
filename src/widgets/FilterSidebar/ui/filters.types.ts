@@ -1,8 +1,8 @@
+import type { QuestionsStatus } from '@/entities/questions';
+
 export interface FilterProps {
 	modal?: boolean;
 }
-
-export type QuestionsStatus = 'Все' | 'Изученные' | 'Не изученные';
 
 export type StatusItem = {
 	id: QuestionsStatus;

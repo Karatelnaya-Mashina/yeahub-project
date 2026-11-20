@@ -1,8 +1,8 @@
+import type { QuestionStepsProps } from '@/pages/MockInterviewPage/model/QuestionSteps.types';
 import Icon from '@/shared/ui/Icon';
-
 import styles from './QuestionSteps.module.scss';
 
-const QuestionSteps = ({ movements, first, last }) => {
+const QuestionSteps = ({ movements, first, last }: QuestionStepsProps) => {
 	return (
 		<div className={styles.questionSteps}>
 			<div className={styles.steps}>
